@@ -5,22 +5,27 @@ const params = new URLSearchParams(window.location.search);
 const id = params.get("appId");
 
 const URL = "https://striveschool-api.herokuapp.com/api/product/";
-
-fetch(URL + id)
-  .then((resp) => resp.json())
+fetch(Url, {
+  headers: { Authorization: token },
+})
+  .then((res) => res.json())
   .then((products) => {
-    const container = document.getElementById("prodottiLista");
-
-    container.innerHTML = `
-                    <h1>${product.name}</h1>
-                    <p class="font-monospace">${product.description}</p>
-                    <p class="lead">${product.imageUrl}</p>
-                    <p class="fs-3 text-${ product.price? }"></p>
-
-                    
-    `;
+    const container = document.getElementById("prodotti");
+    products.forEach((product) => {
+      container.innerHTML += `
+          <div class="col-md-4">
+            
+              <img src="${product.imageUrl}" class="img" />
+              
+                <h5 class="title">${product.name}</h5>
+                <p class="text">${product.description}</p>
+                <p class="text">${product.price}</p>
+                <p class="text">${product.brand}</p>
+                
+                <button id="btn-addCart" class="btn btn-primary" onclick="addProduct('${product._id}')"><i class="bi bi-cart-check"></i></button>
+              
+            
+          </div>`;
+    });
   })
-  .catch((error) => console.log(error));
-  });
-
-  
+  .catch((err) => console.error("Errore nel caricamento prodotti:", err));

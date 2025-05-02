@@ -11,17 +11,17 @@ fetch(Url, {
     products.forEach((product) => {
       container.innerHTML += `
           <div class="col-md-4">
-            <div class="card border-primary mb-4">
-              <img src="${product.imageUrl}" class="card-img-top" />
+            <div class="card border-primary border-3 mb-4">
+              <img src="${product.imageUrl}" class="card-img-top " />
               <div class="card-body">
                 <h5 class="card-title">${product.name}</h5>
                 <p class="card-text">${product.description}</p>
-                <a href="details.html?id=${product._id}" class="btn btn-info">Scopri di più</a>
-                <a href="backoffice.html?productId=${product._id}" class="btn btn-warning">Modifica</a>
+                <a href="details.html?id=${product._id}" id="btn-info" class="btn btn-info ">Scopri di più</a>
+                <a href="backoffice.html?productId=${product._id}" id="btn-edit" class="btn btn-warning"><i class="bi bi-pencil-square"></i>Modifica</a>
+                <button id="btn-addCart" class="btn btn-primary" onclick="addProduct('${product._id}')"><i class="bi bi-cart-check"></i></button>
               </div>
             </div>
           </div>`;
     });
   })
   .catch((err) => console.error("Errore nel caricamento prodotti:", err));
-window.onload = fetchProducts;

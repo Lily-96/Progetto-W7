@@ -85,6 +85,8 @@ form.onsubmit = function (e) {
 
   console.log("SUBMIT", newProduct);
 };
+
+// Funzione per eliminare il prodotto
 const delBtn = document.getElementById("delete-btn");
 delBtn.onclick = function () {
   if (confirm("Sei sicuro di voler eliminare questo prodotto?")) {
