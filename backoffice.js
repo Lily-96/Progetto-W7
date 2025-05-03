@@ -9,7 +9,7 @@ console.log("ID", id);
 
 const URL = id ? "https://striveschool-api.herokuapp.com/api/product/" + id : "https://striveschool-api.herokuapp.com/api/product/";
 const method = id ? "PUT" : "POST";
-
+let originalProduct;
 const form = document.getElementById("backoffice-form");
 
 window.onload = function () {
@@ -34,6 +34,8 @@ window.onload = function () {
         document.getElementById("description").value = product.description;
         document.getElementById("price").value = product.price;
         document.getElementById("imageUrl").value = product.imageUrl;
+        document.getElementById("brand").value = product.brand;
+        originalProduct = { ...product };
       })
       .catch((error) => console.log(error));
   } else {
@@ -86,7 +88,6 @@ form.onsubmit = function (e) {
   console.log("SUBMIT", newProduct);
 };
 
-// Funzione per eliminare il prodotto
 const delBtn = document.getElementById("delete-btn");
 delBtn.onclick = function () {
   if (confirm("Sei sicuro di voler eliminare questo prodotto?")) {
@@ -110,7 +111,10 @@ delBtn.onclick = function () {
 };
 const resetBtn = document.getElementById("reset-btn");
 resetBtn.onclick = function () {
-  if (id) {
+  const confermaReset = confirm("Sei sicuro di voler resettare il modulo?");
+  if (!confermaReset) return;
+
+  if (id && originalProduct) {
     document.getElementById("name").value = originalProduct.name;
     document.getElementById("description").value = originalProduct.description;
     document.getElementById("price").value = originalProduct.price;
@@ -119,4 +123,6 @@ resetBtn.onclick = function () {
   } else {
     form.reset();
   }
+
+  alert("Modulo resettato con successo.");
 };

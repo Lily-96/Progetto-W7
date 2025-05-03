@@ -11,9 +11,9 @@ fetch(Url, {
     products.forEach((product) => {
       container.innerHTML += `
           <div class="col-md-4">
-            <div class="card border-primary border-3 mb-4">
+            <div class="card border-primary  mb-4">
               <img src="${product.imageUrl}" class="card-img-top " />
-              <div class="card-body">
+              <div class="card-body ">
                 <h5 class="card-title">${product.name}</h5>
                 <p class="card-text">${product.description}</p>
                 <a href="details.html?id=${product._id}" id="btn-info" class="btn btn-info ">Scopri di più</a>
